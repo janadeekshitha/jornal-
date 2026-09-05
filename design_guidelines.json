@@ -1,0 +1,162 @@
+{
+  "app_name": "LITTLE",
+  "personality": "4 Tactile / Playful LIGHT",
+  "personality_one_liner": "A visual-first digital scrapbook where one photo and one mood capture the essence of your day with joyful warmth.",
+  "color": {
+    "surface": "#FFFDF9",
+    "onSurface": "#2D2A26",
+    "surfaceSecondary": "#F8F4EC",
+    "onSurfaceSecondary": "#4A453F",
+    "surfaceTertiary": "#F0EAE1",
+    "onSurfaceTertiary": "#635D55",
+    "surfaceInverse": "#2D2A26",
+    "onSurfaceInverse": "#FFFDF9",
+    "brand": "#FF6B6B",
+    "brandPrimary": "#FF6B6B",
+    "onBrandPrimary": "#FFFDF9",
+    "brandSecondary": "#FFB84D",
+    "onBrandSecondary": "#2D2A26",
+    "brandTertiary": "#FFE3E3",
+    "onBrandTertiary": "#D93838",
+    "success": "#4CAF50",
+    "onSuccess": "#FFFDF9",
+    "warning": "#FF9800",
+    "onWarning": "#FFFDF9",
+    "error": "#E53935",
+    "onError": "#FFFDF9",
+    "info": "#2196F3",
+    "onInfo": "#FFFDF9",
+    "border": "#E6DEC7",
+    "borderStrong": "#D1C5A5",
+    "divider": "#EFEBD9",
+    "muted": "#8C847A",
+    "onBrand": "#FFFDF9"
+  },
+  "typography": {
+    "displayFontFamily": "Outfit",
+    "textFontFamily": "Plus Jakarta Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous organic padding and rounded stacking, keeping primary CTAs accessible in the thumb zone.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "pill": 999
+  },
+  "shadow_tier": "2",
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": false,
+    "do's": [
+      "Use solid warm cream surfaces",
+      "Layer cards like physical paper scrapbook elements",
+      "Apply soft terracotta and peach borders"
+    ],
+    "dont's": [
+      "Do not use cold glass blurs or dark futuristic styling",
+      "Avoid sterile corporate grids"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-blur",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Today",
+      "purpose": "Showcases today's captured moment with mood badge, thoughts, and quick capture trigger.",
+      "states": {
+        "loading": "Centered warm spinner with scrapbook greeting",
+        "empty": "Polaroid placeholder with 'Capture today's memory' prompt and bouncy primary button",
+        "error": "Friendly note with Retry button"
+      },
+      "layout": "Sticky top date header with streak counter pill, followed by today's large hero Polaroid card with photo and mood stamp, interactive song/thought capsule, and quick reaction buttons."
+    },
+    {
+      "name": "Capture",
+      "purpose": "Lightning-fast 30-second daily moment capture: photo + mood + optional thought.",
+      "states": {
+        "loading": "Camera viewfinder initializing indicator",
+        "empty": "Camera access permission prompt with clear friendly explanation",
+        "error": "Camera error state with fallback image picker option"
+      },
+      "layout": "Full-bleed live camera viewfinder or photo picker dropzone, floating mood selection pill strip at the bottom, and a prominent round capture shutter button."
+    },
+    {
+      "name": "Journal",
+      "purpose": "A rich chronological scrapbook grid and calendar archive of all past moments.",
+      "states": {
+        "loading": "Warm staggered skeleton cards grid",
+        "empty": "Empty bookshelf illustration with 'Your story starts today' caption and start capture CTA",
+        "error": "Error loading archive with retry action"
+      },
+      "layout": "Search and filter header by mood/month, followed by a staggered two-column masonry scrapbook grid of past memory cards with taped corners and handwritten caption fonts."
+    },
+    {
+      "name": "Mood",
+      "purpose": "Emotional visualization and Spotify-Wrapped style mood breakdown of your life.",
+      "states": {
+        "loading": "Pulsing emotional gradient loader",
+        "empty": "Prompt to log at least 3 days of moods to generate your emotional aura",
+        "error": "Unable to load aura visualization with retry button"
+      },
+      "layout": "Top monthly mood aura flower/gradient card, followed by frequency breakdown bars, emotional word clouds, and reflection cards."
+    },
+    {
+      "name": "Me",
+      "purpose": "Personal settings, streak stats, privacy defaults, and data export options.",
+      "states": {
+        "loading": "Profile shimmer loader",
+        "empty": "Guest profile card with sign in prompt",
+        "error": "Failed to load profile data with refresh action"
+      },
+      "layout": "Profile header with avatar and streak stats, followed by categorized settings rows (Privacy, Reminders, Export Data, About LITTLE) with tinted icon containers."
+    }
+  ],
+  "images": {
+    "hero_polaroid": {
+      "url": "https://images.unsplash.com/photo-1502154882433-a614dba12819",
+      "dark": "https://images.unsplash.com/photo-1502154882433-a614dba12819",
+      "alt": "Polaroid memory card sample"
+    },
+    "journal_sample": {
+      "url": "https://images.unsplash.com/photo-1621775532406-c680225e93dc",
+      "dark": "https://images.unsplash.com/photo-1621775532406-c680225e93dc",
+      "alt": "Scrapbook photo grid item"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build the app using Personality 4 (Tactile / Playful LIGHT) with a warm cream (#FFFDF9) base and coral/peach/sunny yellow accents.",
+    "Ensure all fonts use Outfit for headings and Plus Jakarta Sans for body text, keeping all weights at 400 or 500 max.",
+    "Implement the 5 bottom tabs: Today, Capture, Journal, Mood, Me with the Capture tab visually standing out as the hero action.",
+    "Every screen must support loading, empty, and error states fully.",
+    "Ensure all touch targets are >= 44x44pt and safe area is respected at screen roots.",
+    "Never use banned colors like navy, indigo, violet, or purple; stick to warm earth and soft pastel tones.",
+    "Do not use emojis in system UI; use Ionicons for all interface icons."
+  ]
+}
