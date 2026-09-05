@@ -67,7 +67,6 @@ export default function TodayScreen() {
     }
   }, [entrance]);
 
-  useEffect(() => { load(); }, [load]);
   useFocusEffect(useCallback(() => { load(); }, [load]));
 
   const surprise = async () => {
