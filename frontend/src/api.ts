@@ -1,7 +1,5 @@
 import Constants from "expo-constants";
 
-// EXPO_PUBLIC_BACKEND_URL is the protected preview variable; EXPO_BACKEND_URL
-// remains a compatible fallback for standalone native builds.
 const backendUrl =
   Constants.expoConfig?.extra?.backendUrl ?? process.env.EXPO_PUBLIC_BACKEND_URL ?? process.env.EXPO_BACKEND_URL ?? "";
 const API_URL = `${String(backendUrl).replace(/\/$/, "")}/api`;
@@ -27,6 +25,27 @@ export type Memory = {
   created_at: string;
 };
 
+export type Achievement = {
+  id: string;
+  emoji: string;
+  title: string;
+  detail: string;
+  target: number;
+  progress: number;
+  unlocked: boolean;
+};
+
+export type AchievementsResponse = {
+  total_memories: number;
+  streak: number;
+  core_count: number;
+  achievements: Achievement[];
+};
+
+export type PromptResponse = { category: string; prompt: string; day_key?: string };
+
+export type CaptionResponse = { caption: string; tone: string; mood: string };
+
 type MemoryInput = Omit<Memory, "id" | "created_at">;
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -51,6 +70,11 @@ export const api = {
   deleteMemory: (memoryId: string, userId: string) =>
     request<{ deleted: boolean }>(`/memories/${memoryId}?user_id=${encodeURIComponent(userId)}`, { method: "DELETE" }),
   getMoodSummary: (userId: string) => request<{ total: number; counts: Record<string, number> }>(`/mood-summary?user_id=${encodeURIComponent(userId)}`),
+  getPromptToday: (dayKey: string) => request<PromptResponse>(`/prompts/today?day_key=${encodeURIComponent(dayKey)}`),
+  getPromptSurprise: () => request<PromptResponse>(`/prompts/surprise`),
+  getAchievements: (userId: string) => request<AchievementsResponse>(`/achievements?user_id=${encodeURIComponent(userId)}`),
+  generateCaption: (input: { mood: string; tone: string; hint?: string; user_id: string }) =>
+    request<CaptionResponse>("/captions/generate", { method: "POST", body: JSON.stringify(input) }),
 };
 
 export function asDataUri(value: string) {
