@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.393" timestamp="2026-09-05T15:40:13.503819+00:00" hostname="agent-env-75da4f5d-3026-44af-b0f6-b5ba5103f30e"><testcase classname="tests.test_little_api" name="test_profile_memory_mood_crud_and_base64" time="0.002"><failure message="requests.exceptions.MissingSchema: Invalid URL 'None/api/profiles/TEST_7dcd5d98c56843ad9ed2a28b25148f9b': No scheme supplied. Perhaps you meant https://None/api/profiles/TEST_7dcd5d98c56843ad9ed2a28b25148f9b?">backend/tests/test_little_api.py:24: in test_profile_memory_mood_crud_and_base64
+    profile = session.get(f"{BASE_URL}/api/profiles/{user_id}")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/sessions.py:671: in get
+    return self.request("GET", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/sessions.py:635: in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/sessions.py:541: in prepare_request
+    p.prepare(
+/root/.venv/lib/python3.11/site-packages/requests/models.py:439: in prepare
+    self.prepare_url(url, params)
+/root/.venv/lib/python3.11/site-packages/requests/models.py:514: in prepare_url
+    raise MissingSchema(
+E   requests.exceptions.MissingSchema: Invalid URL 'None/api/profiles/TEST_7dcd5d98c56843ad9ed2a28b25148f9b': No scheme supplied. Perhaps you meant https://None/api/profiles/TEST_7dcd5d98c56843ad9ed2a28b25148f9b?</failure></testcase></testsuite></testsuites>

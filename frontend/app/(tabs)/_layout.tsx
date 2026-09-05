@@ -42,7 +42,7 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.brandPrimary,
         tabBarInactiveTintColor: colors.muted,
-        tabBarStyle: { ...(Platform.OS === "web" ? { height: 64 } : {}) },
+        tabBarStyle: { ...(Platform.OS === "web" ? { display: "none" } : {}) },
         tabBarItemStyle: { alignSelf: "center" },
         tabBarLabelStyle: { fontWeight: "600", fontSize: 11 },
       }}

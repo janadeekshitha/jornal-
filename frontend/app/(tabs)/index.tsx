@@ -6,7 +6,7 @@ import { ActivityIndicator, Animated, Pressable, ScrollView, Text, TextInput, Vi
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, asDataUri, type Memory, type Profile } from "@/src/api";
 import { dayKey, getLittleUserId, prettyDate, PROMPTS } from "@/src/little";
-import { MoodStamp, RetryState, SectionHeading, useLittleStyles } from "@/src/components/little-ui";
+import { MoodStamp, RetryState, SectionHeading, useLittleStyles, WebNav } from "@/src/components/little-ui";
 import { useTheme } from "@/src/theme";
 
 export default function TodayScreen() {
@@ -47,6 +47,7 @@ export default function TodayScreen() {
 
   return (
     <View style={[styles.root, { paddingTop: insets.top }]}>
+      <WebNav active="today" colors={colors} />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Animated.View style={{ opacity: entrance, transform: [{ translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [18, 0] }) }] }}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>

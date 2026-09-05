@@ -35,6 +35,13 @@ LITTLE is a private, visual-first Gen-Z photo journal centered on one simple dai
 - Added FastAPI profile, memory collection/item CRUD, delete, and mood-summary routes with Mongo-safe responses.
 - Added app photo/camera permissions and stable test IDs for critical UI controls.
 
+### 2026-09-05 — Responsive website conversion
+- Converted the Expo experience into a responsive web layout while preserving the same backend, private memory model, and five core areas.
+- Added a centered desktop scrapbook workspace with LITTLE brand header navigation and a desktop Capture CTA.
+- Added a compact mobile-web header with stacked brand/action controls and horizontally scrollable navigation to prevent horizontal overflow.
+- Hid the mobile tab bar on web while retaining native/classic tab navigation on device platforms.
+- Documented the protected `EXPO_PUBLIC_BACKEND_URL` mapping for backend regression scripts that use `EXPO_BACKEND_URL`.
+
 ## Prioritized backlog
 
 ### P0 — next core product work

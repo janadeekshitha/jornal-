@@ -1,12 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Platform, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { makeStyles } from "@/src/theme";
 import { getMood, MOODS } from "@/src/little";
 import type { ThemeColors } from "@/src/theme";
 
 export const useLittleStyles = makeStyles((colors) => ({
   root: { flex: 1, backgroundColor: colors.surface },
-  scroll: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 36 },
+  scroll: { width: "100%", maxWidth: 1080, alignSelf: "center", paddingHorizontal: 20, paddingTop: Platform.OS === "web" ? 28 : 16, paddingBottom: 36 },
   overline: { color: colors.muted, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, textTransform: "uppercase" },
   h1: { color: colors.onSurface, fontSize: 32, lineHeight: 38, fontWeight: "800", letterSpacing: -1 },
   h2: { color: colors.onSurface, fontSize: 22, lineHeight: 28, fontWeight: "800", letterSpacing: -0.4 },
@@ -16,6 +17,26 @@ export const useLittleStyles = makeStyles((colors) => ({
   button: { minHeight: 50, borderRadius: 18, paddingHorizontal: 18, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 8 },
   buttonText: { fontSize: 15, fontWeight: "800" },
 }));
+
+type WebTab = "today" | "capture" | "journal" | "mood" | "me";
+const webTabs: { key: WebTab; label: string; icon: "home-outline" | "camera-outline" | "book-outline" | "sparkles-outline" | "person-outline"; route: string }[] = [
+  { key: "today", label: "Today", icon: "home-outline", route: "/(tabs)" },
+  { key: "capture", label: "Capture", icon: "camera-outline", route: "/(tabs)/capture" },
+  { key: "journal", label: "Journal", icon: "book-outline", route: "/(tabs)/journal" },
+  { key: "mood", label: "Mood", icon: "sparkles-outline", route: "/(tabs)/mood" },
+  { key: "me", label: "Me", icon: "person-outline", route: "/(tabs)/me" },
+];
+
+export function WebNav({ active, colors }: { active: WebTab; colors: ThemeColors }) {
+  const router = useRouter();
+  const { width } = useWindowDimensions();
+  if (Platform.OS !== "web") return null;
+  const compact = width < 820;
+  const tabs = webTabs.map((tab) => <Pressable testID={`web-tab-${tab.key}`} key={tab.key} onPress={() => router.push(tab.route as never)} style={({ pressed }) => [{ minHeight: 44, borderRadius: 14, paddingHorizontal: compact ? 12 : 13, flexDirection: "row", alignItems: "center", gap: 7, backgroundColor: active === tab.key ? colors.brandTertiary : "transparent" }, pressed && { opacity: 0.7 }]}><Ionicons name={tab.icon} size={17} color={active === tab.key ? colors.onBrandTertiary : colors.muted} /><Text style={{ color: active === tab.key ? colors.onBrandTertiary : colors.onSurfaceSecondary, fontSize: 13, fontWeight: "800" }}>{tab.label}</Text></Pressable>);
+  const brand = <Pressable testID="web-brand" onPress={() => router.replace("/(tabs)")} style={{ flexDirection: "row", alignItems: "center", gap: 10 }}><View style={{ width: 38, height: 38, borderRadius: 14, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", transform: [{ rotate: "-7deg" }] }}><Ionicons name="sparkles" size={20} color={colors.onBrandPrimary} /></View><View><Text style={{ color: colors.onSurface, fontSize: 19, fontWeight: "900", letterSpacing: 2 }}>LITTLE</Text><Text style={{ color: colors.muted, fontSize: 10, fontWeight: "700", letterSpacing: 0.6 }}>one little moment</Text></View></Pressable>;
+  const capture = <Pressable testID="web-capture-cta" onPress={() => router.push("/(tabs)/capture" as never)} style={({ pressed }) => [{ minHeight: 44, borderRadius: 999, paddingHorizontal: compact ? 12 : 16, flexDirection: "row", alignItems: "center", gap: 7, backgroundColor: colors.onSurface }, pressed && { opacity: 0.8 }]}><Ionicons name="camera-outline" size={17} color={colors.onSurfaceInverse} />{compact ? null : <Text style={{ color: colors.onSurfaceInverse, fontSize: 13, fontWeight: "800" }}>Capture</Text>}</Pressable>;
+  return <View style={{ borderBottomWidth: 1, borderBottomColor: colors.divider, backgroundColor: colors.surface }}><View style={{ width: "100%", maxWidth: 1160, alignSelf: "center", paddingHorizontal: compact ? 16 : 28 }}>{compact ? <><View style={{ minHeight: 62, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>{brand}{capture}</View><ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 4, paddingBottom: 10 }}>{tabs}</ScrollView></> : <View style={{ minHeight: 78, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 22 }}>{brand}<View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>{tabs}</View>{capture}</View>}</View></View>;
+}
 
 export function MoodSelector({ selected, onSelect, colors }: { selected: string; onSelect: (mood: string) => void; colors: ThemeColors }) {
   return (
